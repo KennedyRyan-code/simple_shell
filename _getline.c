@@ -21,9 +21,9 @@ ssize_t _input_buf(info_t *info, char **buf, size_t *len)
 #if USE_GETLINE
 		d = getline(buf, &len_g, stdin);
 #else
-	   	d = _getline(info, buf, &len_g);
+		d = _getline(info, buf, &len_g);
 #endif
-	    if (d > 0)
+		if (d > 0)
 		{
 			if ((*buf)[d - 1] == '\n')
 			{
@@ -47,44 +47,44 @@ ssize_t _input_buf(info_t *info, char **buf, size_t *len)
  * @info - parameter struct
  * Return: byte read
  */
- ssize_t _getinput(info_t *info)
- {
- 	static char *buf;
- 	static size_t i, j, len;
- 	ssize_t d = 0;
- 	char **buf_g = &(info->arg), *g;
+ssize_t _getinput(info_t *info)
+{
+	static char *buf;
+	static size_t i, j, len;
+	ssize_t d = 0;
+	char **buf_g = &(info->arg), *g;
 
- 	_putchar(BUF_FLUSH);
- 	d = _input_buf(info, &buf, &len);
- 	if (d == -1) /*EOF*/
- 		return (-1);
- 	if (len)
-	 {
-	 	j = i; /*init new iterator to the current buf position */
-	 	g = buf + i;/*gets pointer for return*/
+	_putchar(BUF_FLUSH);
+	d = _input_buf(info, &buf, &len);
+	if (d == -1) /*EOF*/
+		return (-1);
+	if (len)
+	{
+		j = i; /*init new iterator to the current buf position */
+		g = buf + i;/*gets pointer for return*/
 
-	 	check_chain(info, buf, &j, i, len);
-	 	while(j < len)
-		 {
-		 	if (is_chain(info, buf, &j))
-		 		break;
-		 	j++;
-		 }
+		check_chain(info, buf, &j, i, len);
+		while (j < len)
+		{
+			if (is_chain(info, buf, &j))
+				break;
+			j++;
+		}
 
-		 i = j + 1;
-		 if (i >= len)
-		 {
-		 	i = len = 0; /*reset position and length*/
-		 	info->cmd_buf_type = CMD_NORM;
-		 }
+		i = j + 1;
+		if (i >= len)
+		{
+			i = len = 0; /*reset position and length*/
+			info->cmd_buf_type = CMD_NORM;
+		}
 
-		 *buf_g = g;
-		 return (_strlen(g));
-	 }
+		*buf_g = g;
+		return (_strlen(g));
+	}
 
-	 *buf_g = buf;
-	 return (r);
- }
+	*buf_g = buf;
+	return (d);
+}
 
  /**
   * read_buf - read a buffer
@@ -93,11 +93,11 @@ ssize_t _input_buf(info_t *info, char **buf, size_t *len)
   * @i: size
   * Return: d
   */
- ssize_t read_buf(info_t *info, char *buf, size_t *i)
- {
- 	ssize_t d = 0;
+ssize_t read_buf(info_t *info, char *buf, size_t *i)
+{
+	ssize_t d = 0;
 
- 	if (*i)
+	if (*i)
  		return (0);
  	d = read(info->readfd, buf, READ_BUF_SIZE);
  	if (d >= 0)
