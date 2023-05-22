@@ -122,12 +122,16 @@ int _putchar(char c);
 int str_cmp(const char *s1, const char *s2);
 
 
-/* _errors.c */
+/* _errors/ _errors01.c */
 int _eputchar(char);
 int _putfd(char c, int fd);
 int _putsfd(char *str, int fd);
 void _eputs(char *);
 void print_error(info_t *, char *);
+int print_d(int, int);
+char *convert_num(long int, int, int);
+void rm_comments(char *);
+int _erratoi(char *);
 
 /* _atoi.c */
 int interactive(info_t *);
@@ -144,6 +148,17 @@ int _getline(info_t *info, char **ptr, size_t *length);
 void sigintHandler(__attribute__((unused))int sig_num);
 
 
+/* linked_list/list.c */
+size_t print_list(const list_t *);
+size_t list_len(const list_t *);
+ssize_t get_node_index(list_t *, list_t *);
+list_t *node_starts_with(list_t *, char *, char);
+char **list_to_strs(list_t *);
+void free_list(list_t **);
+size_t print_list_str(const list_t *);
+list_t *add_node(list_t **, const char *, int);
+list_t *add_node_end(list_t **, const char *, int);
+int delete_node_at_index(list_t **, unsigned int);
 
 
 
