@@ -163,4 +163,12 @@ int delete_node_at_index(list_t **, unsigned int);
 
 
 
+/*environ*/
+int _ourenv(info_t *info);
+char *_getenv(info_t *info, const char *name);
+int _oursetenv(info_t *info);
+int _ourunsetenv(info_t *info);
+int populateenv_list(info_t *info);
+
+
 #endif /* MAIN_H */
