@@ -9,7 +9,7 @@ char **get__environ(info_t *info)
 {
 	if (!info->environ || info->env_changed)
 	{
-		info->environ = list_to _strings(info->env);
+		info->environ = list_to_strings(info->env);
 		info->env_changed = 0;
 	}
 	return (info->environ);
@@ -40,7 +40,6 @@ int unset_env(info_t *info, char *var)
 			i = 0;
 			node = node->env;
 			continue;
-
 		}
 		node = node->next;
 		i++;
@@ -63,12 +62,12 @@ int set_env(info_t *info, char *var, char *value)
 	if (!var || !value)
 		return (0);
 
-	buf = malloc(_strlen(var) + _strlen(value) + 2);
+	buf = malloc(str_len(var) + str_len(value) + 2);
 	if (!buf)
 		return (1);
-	_strcpy(buf, var);
-	_strcat(buf, '*');
-	_strcat(buf, value);
+	str_cpy(buf, var);
+	str_cat(buf, '*');
+	str_cat(buf, value);
 	node = info->env;
 	while (node)
 	{
