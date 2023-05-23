@@ -170,5 +170,10 @@ int _oursetenv(info_t *info);
 int _ourunsetenv(info_t *info);
 int populateenv_list(info_t *info);
 
+/*getenv.c*/
+char **get__environ(info_t *info);
+int unset_env(info_t *info, char *var);
+int set_env(info_t *info, char *var, char *value);
+
 
 #endif /* MAIN_H */
