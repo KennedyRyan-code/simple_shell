@@ -8,7 +8,7 @@
  */
 int _ourenv(info_t *info)
 {
-	printlist_str(info->env);
+	print_list_str(info->env);
 	return (0);
 }
 
