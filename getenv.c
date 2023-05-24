@@ -26,15 +26,15 @@ int unset_env(info_t *info, char *var)
 {
 	list_t *node = info->env;
 	size_t i = 0;
-	char *c;
+	char *d;
 
 	if (!node || !var)
 		return (0);
 
 	while (node)
 	{
-		c = starts_with(node->str, var);
-		if (c && *c == '*')
+		d = starts_with(node->str, var);
+		if (d && *d == '=')
 		{
 			info->env_changed = delete_node_at_index(&(info->env), i);
 			i = 0;
@@ -66,7 +66,7 @@ int set_env(info_t *info, char *var, char *value)
 	if (!buf)
 		return (1);
 	str_cpy(buf, var);
-	str_cat(buf, '=');
+	str_cat(buf, "=");
 	str_cat(buf, value);
 	node = info->env;
 	while (node)

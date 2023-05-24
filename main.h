@@ -117,7 +117,7 @@ size_t str_len(const char *);
 char *str_cat(char *, char *);
 char *str_cpy(char *, char *);
 char *str_dup(char *);
-int _puts(char *);
+void _puts(char *);
 int _putchar(char c);
 int str_cmp(const char *, const char *);
 char *starts_with(const char *, const char *);
@@ -186,7 +186,8 @@ int populateenv_list(info_t *);
 /*getenv.c*/
 char **get__environ(info_t *);
 int unset_env(info_t *, char *);
-int set_env(info_t *, char *, char *);
+/*int set_env(info_t *, char *, char *);*/
+int set_env(info_t *info, char *var, char *value);
 
 /* realloc.c */
 void *_realloc(void *, unsigned int, unsigned int);
