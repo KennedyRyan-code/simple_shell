@@ -202,7 +202,7 @@ char **strtok2(char *, char);
 int replace_string(char **, char *);
 int replace_vars(info_t *);
 int replace_alias(info_t *);
-int is_chain(info_t *, char, size_t *);
+int is_chain(info_t *info, char *buf, size_t *p);
 void check_chain(info_t *, char *, size_t *, size_t, size_t);
 
 

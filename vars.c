@@ -7,7 +7,7 @@
   * @p: address of the current position in buffer
   * Return: i if chain is delimeter, else 0
   */
-int is_chain(info_t *info, char buf, size_t *p)
+int is_chain(info_t *info, char *buf, size_t *p)
 {
 	size_t k = *p;
 
@@ -73,11 +73,11 @@ int replace_alias(info_t *info)
 
 	for (i = 0; i < 10; i++)
 	{
-		node = node_start_with(info->alias, info->argv[0], '*');
+		node = node_starts_with(info->alias, info->argv[0], '*');
 		if (!node)
 			return (0);
 		free(info->argv[0]);
-		p = str_chr(node->str, '*');
+		p = strchr(node->str, '*');
 		if (!p)
 			return (0);
 		p = str_dup(p + 1);
@@ -105,20 +105,20 @@ int replace_vars(info_t *info)
 		if (!str_cmp(info->argv[i], "$?"))
 		{
 			replace_string(&(info->argv[i]),
-			      str_dup(convert_number(info->status, 10, 0)));
+			      str_dup(convert_num(info->status, 10, 0)));
 			continue;
 		}
 		if (!str_cmp(info->argv[i], "$$"))
 		{
 			replace_string(&(info->argv[i]),
-			      str_dup(convert_number(getpid, 10, 0)));
+			      str_dup(convert_num(getpid, 10, 0)));
 			continue;
 		}
 		node = node_starts_with(info->env, &info->argv[i][1], '*');
 		if (node)
 		{
 			replace_string(&(info->argv[i]),
-			      str_dup(str_chr(node->str, '*') + 1));
+			      str_dup(strchr(node->str, '*') + 1));
 			continue;
 		}
 		replace_string(&info->argv[i], str_dup(""));

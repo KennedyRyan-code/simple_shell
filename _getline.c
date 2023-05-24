@@ -44,7 +44,7 @@ ssize_t _input_buf(info_t *info, char **buf, size_t *len)
 
 /**
  * _getinput - gets a line minus the newline
- * @info - parameter struct
+ * @info :  parameter struct
  * Return: byte read
  */
 ssize_t _getinput(info_t *info)
@@ -86,8 +86,9 @@ ssize_t _getinput(info_t *info)
 	return (d);
 }
 
+
  /**
-  * read_buf - read a buffer
+  *read_buf - read a buffer
   * @info: parameter struct
   * @buf: buffer
   * @i: size
@@ -98,12 +99,12 @@ ssize_t read_buf(info_t *info, char *buf, size_t *i)
 	ssize_t d = 0;
 
 	if (*i)
- 		return (0);
- 	d = read(info->readfd, buf, READ_BUF_SIZE);
- 	if (d >= 0)
- 		*i = d;
- 	return (d);
- }
+		return (0);
+	d = read(info->readfd, buf, READ_BUF_SIZE);
+	if (d >= 0)
+		*i = d;
+	return (d);
+}
 
  /**
   * _getline - gets the next line of input from standard inputs
@@ -147,7 +148,7 @@ int _getline(info_t *info, char **ptr, size_t *length)
 	g = new_g;
 
 	if (length)
-		*length = s
+		*length = s;
 	*ptr = g;
 	return (s);
 }
