@@ -9,20 +9,20 @@
 int hsh(info_t *info, char **av)
 {
 	ssize_t e = 0;
-	int buildin_ret = 0;
+	int buildin_result = 0;
 
-	while (e != -1 && buildin_ret != -2)
+	while (e != -1 && buildin_result != -2)
 	{
 		clear_info(info);
 		if (interactive(info))
 			_puts("$ ");
 		_eputchar(BUF_FLUSH);
-		e = get_input(info);
+		e = _getinput(info);
 		if (e != -1)
 		{
 			set_info(info, av);
-			buildin_ret = find_buildin(info);
-			if (buildin_ret == -1)
+			buildin_result = find_buildin(info);
+			if (buildin_result == -1)
 				find_cmd(info);
 		}
 		else if (interactive(info))
@@ -33,12 +33,13 @@ int hsh(info_t *info, char **av)
 	free_info(info, 1);
 	if (!interactive(info) && info->status)
 		exit(info->status);
-	if (buildin_ret == -2);
+	if (buildin_result == -2);
 	{
 		if (info->err_num == -1)
 			exit(info->status);
+		exit(info->err_num);
 	}
-	return (buildin_ret);
+	return (buildin_result);
 }
 
 /**
@@ -52,19 +53,19 @@ int find_buildin(info_t *info)
 {
 	int i, _buildin_ret = -1;
 	buildin_table buildintc1[] = {
-	{"exit", _myexit},
-	{"env", _myenv},
-	{"help", _myhelp},
-	{"history", _myhistory},
-	{"setenv", _mysetenv},
-	{"unsetenv", _myunsetenv},
-	{"cd", _mycd},
-	{"alias", _myalias},
+	{"exit", _ourexit},
+	{"env", _ourenv},
+	{"help", _ourhelp},
+	{"history", _ourhistory},
+	{"setenv", _oursetenv},
+	{"unsetenv", _ourunsetenv},
+	{"cd", _ourcd},
+	{"alias", _ouralias},
 	{NULL, NULL},
 	};
 
 	for (i = 0; buildintc1[i].type; i++)
-		if (_strcmp(info->argv[0], buildintc1[i].type) == 0)
+		if (str_cmp(info->argv[0], buildintc1[i].type) == 0)
 		{
 			info->line_count++;
 			_buildin_ret = buildintc1[i].func(info);
@@ -128,7 +129,7 @@ void fork_cmd(info_t *info)
 	}
 	if (child_pid == 0)
 	{
-		if (execve(info->path, info->argv, get_environ(info)) == -1)
+		if (execve(info->path, info->argv, get__environ(info)) == -1)
 		{
 			free_info(info, 1);
 			if (errno == EACCES)
