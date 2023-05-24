@@ -120,6 +120,7 @@ char *str_dup(char *str);
 int _puts(char *str);
 int _putchar(char c);
 int str_cmp(const char *s1, const char *s2);
+char *starts_with(const char *, const char *);
 
 /* string_man.c */
 char *_strncpy(char *, char *, int);
