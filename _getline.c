@@ -19,7 +19,7 @@ ssize_t _input_buf(info_t *info, char **buf, size_t *len)
 		*buf = NULL;
 		signal(SIGINT, sigintHandler);
 #if USE_GETLINE
-		d = getline(buf, &len_g, stdin);
+		d = _getline(buf, &len_g, stdin);
 #else
 		d = _getline(info, buf, &len_g);
 #endif
@@ -31,7 +31,7 @@ ssize_t _input_buf(info_t *info, char **buf, size_t *len)
 				r--;
 			}
 			info->linecount_flag = 1;
-			remove_coments(*buf);
+			rm_comments(*buf);
 			build_history_list(info, *buf, info->histcount++);
 			{
 				*len = d;
@@ -79,7 +79,7 @@ ssize_t _getinput(info_t *info)
 		}
 
 		*buf_g = g;
-		return (_strlen(g));
+		return (str_len(g));
 	}
 
 	*buf_g = buf;
@@ -130,25 +130,25 @@ int _getline(info_t *info, char **ptr, size_t *length)
 	if (d == -1 || (d == 0 && len == 0))
 		return (-1);
 
-	C = _strchr(buf + i, '\n');
+	C = strchr(buf + i, '\n');
 	j = C ? 1 + (unsigned int)(C - buf) : len;
-	new_g = realloc(g, s, s ? s + j : j + 1);
+	new_g = _realloc(g, s, s ? s + j : j + 1);
 	if (!new_g)
 		return (g ? free(g), -1 : -1);
 
 	if (s)
-		_strncat(new_g, buf + i, k - i);
+		_strncat(new_g, buf + i, j - i);
 	else
 	{
-		_strncpy(new_g, buf + i, k - i + 1);
+		_strncpy(new_g, buf + i, j - i + 1);
 	}
-	s = s + k - i;
+	s = s + j - i;
 	i = j;
 	g = new_g;
 
 	if (length)
 		*length = s
-	*ptr = p;
+	*ptr = g;
 	return (s);
 }
 
