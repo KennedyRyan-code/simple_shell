@@ -175,5 +175,17 @@ char **get__environ(info_t *info);
 int unset_env(info_t *info, char *var);
 int set_env(info_t *info, char *var, char *value);
 
+/* realloc.c */
+void *_realloc(void *, unsigned int, unsigned int);
+char *_memset(char *, char, unsigned int);
+void ffree(char **);
+int bfree(void **);
+
+/* strtok.c */
+char **strtok(char *, char *);
+char **strtok1(char *, char);
+
+
+
 
 #endif /* MAIN_H */
