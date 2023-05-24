@@ -160,7 +160,15 @@ list_t *add_node(list_t **, const char *, int);
 list_t *add_node_end(list_t **, const char *, int);
 int delete_node_at_index(list_t **, unsigned int);
 
-
+/* builtin/builtin1.c */
+int _ourhelp(info_t *);
+int _ourexit(info_t *);
+int _ourcd(info_t *);
+int _ourhistory(info_t *);
+int set_alias(info_t *info, char *);
+int unset_alias(info_t *info, char *);
+int _ouralias(info_t *);
+int print_alias(list_t *);
 
 
 /*environ*/
