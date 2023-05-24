@@ -33,7 +33,7 @@ int hsh(info_t *info, char **av)
 	free_info(info, 1);
 	if (!interactive(info) && info->status)
 		exit(info->status);
-	if (buildin_result == -2);
+	if (buildin_result == -2)
 	{
 		if (info->err_num == -1)
 			exit(info->status);
@@ -49,7 +49,7 @@ int hsh(info_t *info, char **av)
  * 1 if found but not successful
  * -2 if the buildin signals exit()
  */
-int find_buildin(info_t *info)
+int find_builtin(info_t *info)
 {
 	int i, _buildin_ret = -1;
 	buildin_table buildintc1[] = {
@@ -83,6 +83,7 @@ void find_cmd(info_t *info)
 {
 	char *path = NULL;
 	int i, j;
+
 	info->path = info->argv[0];
 	if (info->linecount_flag == 1)
 	{
@@ -142,7 +143,7 @@ void fork_cmd(info_t *info)
 		wait(&(info->status));
 		if (WIFEXITED(info->status))
 		{
-			info-status = WEXITSTATUS(info->status);
+			info->status = WEXITSTATUS(info->status);
 			if (info->status == 126)
 				print_error(info, "permission denied\n");
 		}
