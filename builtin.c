@@ -91,8 +91,8 @@ int _ourcd(info_t *info)
 	}
 	else
 	{
-		_setenv(info, "OLDPWD", _getenv(info, "PWD="));
-		_setenv(info, "PWD", getcwd(buffer, 1024));
+		set_env(info, "OLDPWD", _getenv(info, "PWD="));
+		set_env(info, "PWD", getcwd(buffer, 1024));
 	}
 	return (0);
 }

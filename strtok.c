@@ -38,7 +38,7 @@ char **strtok(char *str, char *d)
 		if (!c[j])
 		{
 			for (k = 0; k < j; k++)
-				free(s[k]);
+				free(c[k]);
 			free(c);
 			return (NULL);
 		}
