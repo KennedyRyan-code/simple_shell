@@ -3,7 +3,7 @@
 /**
  * _ourenv - prints the current environmet
  * @info: structure containing potential argument
-       (used to maintain constant fuction prototye)
+ *
  * Return: 0
  */
 int _ourenv(info_t *info)
@@ -16,6 +16,8 @@ int _ourenv(info_t *info)
  * _getenv - gets the value of an environ variable
  * @info: structure containing potential arguments.
  * @name: env variable name.
+ *
+ * Return: NULL
  */
 char *_getenv(info_t *info, const char *name)
 {
@@ -73,8 +75,8 @@ int _ourunsetenv(info_t *info)
 /**
  * populateenv_list - populates env linked list
  * @info: structure containing potential argument
- *(maintain constant function prototye)
- *Ruturn: 0;
+ *
+ * Return: 0
  */
 int populateenv_list(info_t *info)
 {
