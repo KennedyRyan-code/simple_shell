@@ -121,6 +121,10 @@ int _puts(char *str);
 int _putchar(char c);
 int str_cmp(const char *s1, const char *s2);
 
+/* string_man.c */
+char *_strncpy(char *, char *, int);
+char *_strncat(char *, char *, int);
+char *strchr(char *, char);
 
 /* _errors/ _errors01.c */
 int _eputchar(char);
