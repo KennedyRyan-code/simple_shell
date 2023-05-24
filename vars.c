@@ -111,7 +111,7 @@ int replace_vars(info_t *info)
 		if (!str_cmp(info->argv[i], "$$"))
 		{
 			replace_string(&(info->argv[i]),
-			      str_dup(convert_num(getpid, 10, 0)));
+				       str_dup(convert_num(getpid(), 10, 0)));
 			continue;
 		}
 		node = node_starts_with(info->env, &info->argv[i][1], '*');

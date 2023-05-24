@@ -33,12 +33,12 @@ int is_cmd(info_t *info, char *path)
 char *dup_chars(char *pathstr, int start, int stop)
 {
 	static char buf[1024];
-	int i = 0, j = 0;
+	int i = 0, m = 0;
 
-	for (j = 0, i = start; i < stop; i++)
+	for (m = 0, i = start; i < stop; i++)
 		if (pathstr[i] != ':')
-			buf[j++] = pathstr[i];
-	buf[j] = 0;
+			buf[m++] = pathstr[i];
+	buf[m] = 0;
 	return (buf);
 }
 
@@ -52,7 +52,7 @@ char *dup_chars(char *pathstr, int start, int stop)
  */
 char *find_path(info_t *info, char *pathstr, char *cmd)
 {
-	int i = 0, current_position = 0;
+	int i = 0, c_pos = 0;
 	char *path;
 
 	if (!pathstr)
@@ -66,7 +66,7 @@ char *find_path(info_t *info, char *pathstr, char *cmd)
 	{
 		if (!pathstr[i] || pathstr[i] == ':')
 		{
-			path = dup_chars(pathstr, current_position, i);
+			path = dup_chars(pathstr, c_pos, i);
 			if (!*path)
 				str_cat(path, cmd);
 			else
@@ -78,7 +78,7 @@ char *find_path(info_t *info, char *pathstr, char *cmd)
 				return (path);
 			if (!pathstr[i])
 				break;
-			current_position = i;
+			c_pos = i;
 		}
 		i++;
 	}

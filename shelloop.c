@@ -71,7 +71,7 @@ int find_builtin(info_t *info)
 			_buildin_ret = buildintc1[i].func(info);
 			break;
 		}
-		return (_buildin_ret);
+	return (_buildin_ret);
 }
 
 /**
@@ -95,7 +95,7 @@ void find_cmd(info_t *info)
 			j++;
 	if (!j)
 		return;
-	path = find_path(info, _getenv(info, "PATH"), info->argv[0]);
+	path = find_path(info, _getenv(info, "PATH="), info->argv[0]);
 	if (path)
 	{
 		info->path = path;

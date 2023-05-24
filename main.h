@@ -226,4 +226,12 @@ void free_info(info_t *info, int all);
 void set_info(info_t *info, char **av);
 void clear_info(info_t *info);
 
+
+/* passer.c */
+int is_cmd(info_t *info, char *path);
+char *dup_chars(char *pathstr, int start, int stop);
+char *find_path(info_t *info, char *pathstr, char *cmd);
+
+
+
 #endif /* MAIN_H */
