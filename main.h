@@ -197,7 +197,27 @@ int bfree(void **);
 char **strtok(char *, char *);
 char **strtok1(char *, char);
 
+/*vars.c*/
+int replace_string(char **old, char *new);
+int replace_vars(info_t *info);
+int replace_alias(info_t *info);
+int is_chain(info_t *info, char buf, size_t *p);
+void check_chain(info_t *info, char *buf, size_t *p, size_t i, size_t len);
 
+
+/*history.c*/
+int build_history_list(info_t *info, char *buf, int linecounter);
+int renumber_history(info_t *info);
+int read_history(info_t *info);
+int write_history(info_t *info);
+char *get_history_file(info_t *info);
+
+
+/*shelloop.c*/
+int hsh(info_t *info, char **av);
+int find_buildin(info_t *info);
+void find_cmd(info_t *info);
+void fork_cmd(info_t *info);
 
 
 #endif /* MAIN_H */
