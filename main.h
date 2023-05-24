@@ -125,7 +125,7 @@ char *starts_with(const char *, const char *);
 /* string_man.c */
 char *_strncpy(char *, char *, int);
 char *_strncat(char *, char *, int);
-char *strchr(char *, char);
+char *_strchr(char *, char);
 
 /* _errors/ _errors01.c */
 int _eputchar(char);
@@ -147,10 +147,10 @@ int _atoi(char *);
 
 /* _getline.c*/
 ssize_t _input_buf(info_t *info, char **buf, size_t *len);
-ssize_t _getinput(info_t *info);
-ssize_t read_buf(info_t *info, char *buf, size_t *i);
-int _getline(info_t *info, char **ptr, size_t *length);
-void sigintHandler(__attribute__((unused))int sig_num);
+ssize_t _getinput(info_t *);
+ssize_t read_buf(info_t *info, char *, size_t *);
+int _getline(info_t *, char **, size_t *);
+void sigintHandler(int);
 
 
 /* linked_list/list.c */
@@ -177,16 +177,16 @@ int print_alias(list_t *);
 
 
 /*environ*/
-int _ourenv(info_t *info);
-char *_getenv(info_t *info, const char *name);
-int _oursetenv(info_t *info);
-int _ourunsetenv(info_t *info);
-int populateenv_list(info_t *info);
+int _ourenv(info_t *);
+char *_getenv(info_t *, const char *);
+int _oursetenv(info_t *);
+int _ourunsetenv(info_t *);
+int populateenv_list(info_t *);
 
 /*getenv.c*/
-char **get__environ(info_t *info);
-int unset_env(info_t *info, char *var);
-int set_env(info_t *info, char *var, char *value);
+char **get__environ(info_t *);
+int unset_env(info_t *, char *);
+int set_env(info_t *, char *, char *);
 
 /* realloc.c */
 void *_realloc(void *, unsigned int, unsigned int);
@@ -195,15 +195,15 @@ void ffree(char **);
 int bfree(void **);
 
 /* strtok.c */
-char **strtok(char *, char *);
-char **strtok1(char *, char);
+char **strtok1(char *, char *);
+char **strtok2(char *, char);
 
 /*vars.c*/
-int replace_string(char **old, char *new);
-int replace_vars(info_t *info);
-int replace_alias(info_t *info);
-int is_chain(info_t *info, char buf, size_t *p);
-void check_chain(info_t *info, char *buf, size_t *p, size_t i, size_t len);
+int replace_string(char **, char *);
+int replace_vars(info_t *);
+int replace_alias(info_t *);
+int is_chain(info_t *, char, size_t *);
+void check_chain(info_t *, char *, size_t *, size_t, size_t);
 
 
 /*history.c*/
@@ -215,10 +215,10 @@ char *get_history_file(info_t *info);
 
 
 /*shelloop.c*/
-int hsh(info_t *info, char **av);
-int find_buildin(info_t *info);
-void find_cmd(info_t *info);
-void fork_cmd(info_t *info);
+int hsh(info_t *, char **);
+int find_buildin(info_t *);
+void find_cmd(info_t *);
+void fork_cmd(info_t *);
 
 
 /*getinfo.c*/
