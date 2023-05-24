@@ -7,7 +7,7 @@
  * @n: the amount of characters toe copied
  * Return: the string concatinated
  */
-char *_strncopy(char *dest, char *src, int n)
+char *_strncpy(char *dest, char *src, int n)
 {
 	int i, j;
 	char *d = dest;
@@ -59,7 +59,7 @@ char *_strncat(char *dest, char *src, int n)
 }
 
 /**
- * _strchr - locates a character in a string
+ * strchr - locates a character in a string
  * @s: the string to be parsed
  * @c: the character to look for
  * Return: s-a pointer to the memory area s
