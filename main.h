@@ -220,4 +220,9 @@ void find_cmd(info_t *info);
 void fork_cmd(info_t *info);
 
 
+/*getinfo.c*/
+void free_info(info_t *info, int all);
+void set_info(info_t *info, char **av);
+void clear_info(info_t *info);
+
 #endif /* MAIN_H */
