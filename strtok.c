@@ -7,7 +7,7 @@
  * Return: an array of strings, or NULL
  */
 
-char **strtok(char *str, char *d)
+char **strtok1(char *str, char *d)
 {
 	int j, k, i, m, num_words = 0;
 	char **c;
@@ -56,7 +56,7 @@ char **strtok(char *str, char *d)
  * @d: the delimeter
  * Return: a pointer to an array of strings, or NULL on failure
  */
-char **strtok1(char *str, char d)
+char **strtok2(char *str, char d)
 {
 	int m, k, j, i, num_words = 0;
 	char **c;

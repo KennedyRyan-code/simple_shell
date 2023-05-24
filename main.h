@@ -113,13 +113,13 @@ typedef struct builtin
 
 
 /* string.c */
-size_t str_len(const char *str);
-char *str_cat(char *dest, char *src);
-char *str_cpy(char *dest, char *src);
-char *str_dup(char *str);
-int _puts(char *str);
+size_t str_len(const char *);
+char *str_cat(char *, char *);
+char *str_cpy(char *, char *);
+char *str_dup(char *);
+int _puts(char *);
 int _putchar(char c);
-int str_cmp(const char *s1, const char *s2);
+int str_cmp(const char *, const char *);
 char *starts_with(const char *, const char *);
 
 /* string_man.c */
