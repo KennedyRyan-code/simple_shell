@@ -30,9 +30,6 @@
 #define HIST_FILE	".simple_shell_history"
 #define HIST_MAX	4096
 
-#define INFO_INIT \
-{NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
-	0, 0, 0}
 
 /* Declare the environ variable */
 extern char **environ;
@@ -56,48 +53,51 @@ typedef struct strlist
 
 /**
  * struct info - struct for programs data
- * @arg: argument strings from getline
- * @argv: array of strings from arg
- * @path: string path for the current command
- * @argc: argument count
- * @fname: program filename
- * @env:  lined list local copy
- * @environ: custom modified copy of environ
- * @env_changed: if environ was changed
- * @line_ecount: the error count
- * @linecount_flag: count on line of input
- * @err_num: the error code for exit()s
- * @alias: the alias node
- * @history: the history node
- * @histcount: the history line number count
- * @status: the return status of the last executed command
- * @cmd_buf: on if chaining, address of pointer to cmd_buf
- * @cmd_buf_type: CMD_type ||, &&, ;
- * @readfd: the file discriptor from which to read line input
- *
+ *@arg: a string generated from getline containing arguements
+ *@argv: an array of strings generated from arg
+ *@path: a string path for the current command
+ *@argc: the argument count
+ *@line_count: the error count
+ *@err_num: the error code for exit()s
+ *@linecount_flag: if on count this line of input
+ *@fname: the program filename
+ *@env: linked list local copy of environ
+ *@environ: custom modified copy of environ from LL env
+ *@history: the history node
+ *@alias: the alias node
+ *@env_changed: on if environ was changed
+ *@status: the return status of the last exec'd command
+ *@cmd_buf: address of pointer to cmd_buf, on if chaining
+ *@cmd_buf_type: CMD_type ||, &&, ;
+ *@readfd: the fd from which to read line input
+ *@histcount: the history line number count
  */
-
 typedef struct info
 {
 	char *arg;
 	char **argv;
 	char *path;
 	int argc;
+	unsigned int line_count;
+	int err_num;
+	int linecount_flag;
 	char *fname;
 	list_t *env;
+	list_t *history;
+	list_t *alias;
 	char **environ;
 	int env_changed;
-	unsigned int line_ecount;
-	int linecount_flag;
-	int err_num;
-	list_t *alias;
-	list_t *history;
-	int histcount;
 	int status;
-	char **cmd_buf;
-	int cmd_buf_type;
+
+	char **cmd_buf; /* pointer to cmd */
+	int cmd_buf_type; /* CMD_type ||, &&, ; */
 	int readfd;
+	int histcount;
 } info_t;
+
+#define INFO_INIT \
+{NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
+	0, 0, 0}
 
 
 /**
@@ -146,9 +146,7 @@ int _atoi(char *);
 
 
 /* _getline.c*/
-ssize_t _input_buf(info_t *info, char **buf, size_t *len);
 ssize_t _getinput(info_t *);
-ssize_t read_buf(info_t *info, char *, size_t *);
 int _getline(info_t *, char **, size_t *);
 void sigintHandler(int);
 
@@ -187,7 +185,7 @@ int populateenv_list(info_t *);
 char **get__environ(info_t *);
 int unset_env(info_t *, char *);
 /*int set_env(info_t *, char *, char *);*/
-int set_env(info_t *info, char *var, char *value);
+int set_env(info_t *, char *, char *);
 
 /* realloc.c */
 void *_realloc(void *, unsigned int, unsigned int);
@@ -203,7 +201,7 @@ char **strtok2(char *, char);
 int replace_string(char **, char *);
 int replace_vars(info_t *);
 int replace_alias(info_t *);
-int is_chain(info_t *info, char *buf, size_t *p);
+int is_chain(info_t *, char *, size_t *);
 void check_chain(info_t *, char *, size_t *, size_t, size_t);
 
 
@@ -217,7 +215,7 @@ char *get_history_file(info_t *info);
 
 /*shelloop.c*/
 int hsh(info_t *, char **);
-int find_buildin(info_t *);
+int find_builtin(info_t *);
 void find_cmd(info_t *);
 void fork_cmd(info_t *);
 

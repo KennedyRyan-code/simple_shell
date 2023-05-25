@@ -9,9 +9,9 @@
 int hsh(info_t *info, char **av)
 {
 	ssize_t e = 0;
-	int buildin_result = 0;
+	int builtin_result = 0;
 
-	while (e != -1 && buildin_result != -2)
+	while (e != -1 && builtin_result != -2)
 	{
 		clear_info(info);
 		if (interactive(info))
@@ -21,8 +21,8 @@ int hsh(info_t *info, char **av)
 		if (e != -1)
 		{
 			set_info(info, av);
-			buildin_result = find_buildin(info);
-			if (buildin_result == -1)
+			builtin_result = find_builtin(info);
+			if (builtin_result == -1)
 				find_cmd(info);
 		}
 		else if (interactive(info))
@@ -33,13 +33,13 @@ int hsh(info_t *info, char **av)
 	free_info(info, 1);
 	if (!interactive(info) && info->status)
 		exit(info->status);
-	if (buildin_result == -2)
+	if (builtin_result == -2)
 	{
 		if (info->err_num == -1)
 			exit(info->status);
 		exit(info->err_num);
 	}
-	return (buildin_result);
+	return (builtin_result);
 }
 
 /**
@@ -51,8 +51,8 @@ int hsh(info_t *info, char **av)
  */
 int find_builtin(info_t *info)
 {
-	int i, _buildin_ret = -1;
-	builtin_table buildintc1[] = {
+	int i, _builtin_ret = -1;
+	builtin_table builtintc1[] = {
 	{"exit", _ourexit},
 	{"env", _ourenv},
 	{"help", _ourhelp},
@@ -64,14 +64,14 @@ int find_builtin(info_t *info)
 	{NULL, NULL},
 	};
 
-	for (i = 0; buildintc1[i].type; i++)
-		if (str_cmp(info->argv[0], buildintc1[i].type) == 0)
+	for (i = 0; builtintc1[i].type; i++)
+		if (str_cmp(info->argv[0], builtintc1[i].type) == 0)
 		{
-			info->line_ecount++;
-			_buildin_ret = buildintc1[i].func(info);
+			info->line_count++;
+			_builtin_ret = builtintc1[i].func(info);
 			break;
 		}
-	return (_buildin_ret);
+	return (_builtin_ret);
 }
 
 /**
@@ -87,7 +87,7 @@ void find_cmd(info_t *info)
 	info->path = info->argv[0];
 	if (info->linecount_flag == 1)
 	{
-		info->line_ecount++;
+		info->line_count++;
 		info->linecount_flag = 0;
 	}
 	for (i = 0, j = 0; info->arg[i]; i++)
