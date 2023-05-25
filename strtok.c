@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * **strtok - splits a string into words. Repeat delimiters are ignored
+ * strtok1 - splits a string into words. Repeat delimiters are ignored
  * @str: the input string
  * @d: the delimeter string
  * Return: an array of strings, or NULL
@@ -51,7 +51,7 @@ char **strtok1(char *str, char *d)
 }
 
 /**
- * **strtok1 - splits a string into words
+ * strtok2 - splits a string into words
  * @str: the input string
  * @d: the delimeter
  * Return: a pointer to an array of strings, or NULL on failure

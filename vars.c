@@ -36,15 +36,15 @@ int is_chain(info_t *info, char *buf, size_t *p)
 	return (1);
 }
 
- /**
-  *check_chain- checks if we should continue chaining based on last status
-  * @info: parameter struct
-  * @buf: the char buffer
-  * @p: address of current position in buffer
-   * @i: starting position in buffer
-   * @len: length of buffer
-   * Return: void
-   */
+/**
+* check_chain - checks if we should continue chaining based on last status
+* @info: parameter struct
+* @buf: the char buffer
+* @p: address of current position in buffer
+* @i: starting position in buffer
+* @len: length of buffer
+* Return: void
+*/
 void check_chain(info_t *info, char *buf, size_t *p, size_t i, size_t len)
 {
 	size_t k = *p;
@@ -60,11 +60,11 @@ void check_chain(info_t *info, char *buf, size_t *p, size_t i, size_t len)
 	*p = k;
 }
 
- /**
-  *replace_alias- replace an alias in the tokenized str
-  * @info: parameter struct
-  * Return: if replaced 1, else 0;
-  */
+/**
+* replace_alias - replace an alias in the tokenized str
+* @info: parameter struct
+* Return: if replaced 1, else 0;
+*/
 int replace_alias(info_t *info)
 {
 	int i;

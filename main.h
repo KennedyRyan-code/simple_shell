@@ -116,7 +116,7 @@ typedef struct builtin
 size_t str_len(const char *);
 char *str_cat(char *, char *);
 char *str_cpy(char *, char *);
-char *str_dup(char *);
+char *str_dup(const char *);
 void _puts(char *);
 int _putchar(char c);
 int str_cmp(const char *, const char *);
