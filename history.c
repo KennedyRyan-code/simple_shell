@@ -10,8 +10,8 @@ char *get_history_file(info_t *info)
 	char *buf, *dir;
 
 	dir = _getenv(info, "HOME ");
-		if (!dir)
-			return (NULL);
+	if (!dir)
+		return (NULL);
 	buf = malloc(sizeof(char) * (str_len(dir) + str_len(HIST_FILE) + 2));
 	if (buf)
 		return (NULL);
@@ -81,13 +81,13 @@ int read_history(info_t *info)
 	if (rdlen <= 0)
 		return (free(buf), 0);
 	close(fd);
-		for (i = 0; i < fsize; i++)
-			if (buf[i] == '\n')
-			{
-				buf[i] = 0;
-				build_history_list(info, buf + last, linecount++);
-				last = i + 1;
-			}
+	for (i = 0; i < fsize; i++)
+		if (buf[i] == '\n')
+		{
+			buf[i] = 0;
+			build_history_list(info, buf + last, linecount++);
+			last = i + 1;
+		}
 	if (last != i)
 		build_history_list(info, buf + last, linecount++);
 	free(buf);

@@ -52,7 +52,7 @@ int hsh(info_t *info, char **av)
 int find_builtin(info_t *info)
 {
 	int i, _builtin_ret = -1;
-	builtin_table builtintc1[] = {
+	builtin_table builtintb1[] = {
 	{"exit", _ourexit},
 	{"env", _ourenv},
 	{"help", _ourhelp},
@@ -64,11 +64,11 @@ int find_builtin(info_t *info)
 	{NULL, NULL},
 	};
 
-	for (i = 0; builtintc1[i].type; i++)
-		if (str_cmp(info->argv[0], builtintc1[i].type) == 0)
+	for (i = 0; builtintb1[i].type; i++)
+		if (str_cmp(info->argv[0], builtintb1[i].type) == 0)
 		{
 			info->line_count++;
-			_builtin_ret = builtintc1[i].func(info);
+			_builtin_ret = builtintb1[i].func(info);
 			break;
 		}
 	return (_builtin_ret);

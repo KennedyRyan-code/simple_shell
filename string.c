@@ -7,17 +7,16 @@
  * Return: len
  */
 
-size_t str_len(const char *str)
+size_t str_len(char *str)
 {
-	size_t len = 0;
+	int i = 0;
 
-	while (*str != '\0')
-	{
-		len++;
-		str++;
-	}
+	if (!str)
+		return (0);
 
-	return (len);
+	while (*str++)
+		i++;
+	return (i);
 }
 
 /**
@@ -30,17 +29,14 @@ size_t str_len(const char *str)
 
 char *str_cat(char *dest, char *src)
 {
-	size_t i, l = 0;
+	char *ret = dest;
 
-	i = str_len(dest);
-
-	for (l = 0; src[l] != '\0'; l++)
-	{
-		dest[i + l] = src[l];
-	}
-	dest[l + l] = '\0';
-
-	return (dest);
+	while (*dest)
+		dest++;
+	while (*src)
+		*dest++ = *src++;
+	*dest = *src;
+	return (ret);
 }
 
 
@@ -53,13 +49,16 @@ char *str_cat(char *dest, char *src)
 
 char *str_cpy(char *dest, char *src)
 {
-	size_t a;
+	int i = 0;
 
-	for (a = 0; src[a] != '\0'; a++)
-		dest[a] = src[a];
-
-	dest[a] = '\0';
-
+	if (dest == src || src == 0)
+		return (dest);
+	while (src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = 0;
 	return (dest);
 }
 
@@ -88,8 +87,6 @@ char *str_dup(const char *str)
 }
 
 
-
-
 /**
  * str_cmp - compare two strings
  * @s1: first string to be compared
@@ -98,13 +95,17 @@ char *str_dup(const char *str)
  * Return: 0 if strings are identical, negative value if s1 is less than s2,
  *         positive value if s1 is greater than s2
  */
-int str_cmp(const char *s1, const char *s2)
+int str_cmp(char *s1, char *s2)
 {
-	while (*s1 != '\0' && *s2 != '\0' && *s1 == *s2)
+	while (*s1 && *s2)
 	{
+		if (*s1 != *s2)
+			return (*s1 - *s2);
 		s1++;
 		s2++;
 	}
-
-	return (*s1 - *s2);
+	if (*s1 == *s2)
+		return (0);
+	else
+		return (*s1 < *s2 ? -1 : 1);
 }
