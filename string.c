@@ -70,30 +70,24 @@ char *str_cpy(char *dest, char *src)
  *
  * Return: pointer to a new string or NULL
  */
-
-char *str_dup(char *str)
+char *str_dup(const char *str)
 {
-	size_t i, len;
-	char *new_s;
+	int length = 0;
+	char *ret;
 
 	if (str == NULL)
 		return (NULL);
-
-	len = str_len(str);
-
-	new_s = malloc(sizeof(char) * (len + 1));
-
-	if (new_s == NULL)
+	while (*str++)
+		length++;
+	ret = malloc(sizeof(char) * (length + 1));
+	if (!ret)
 		return (NULL);
-
-	for (i = 0; i < len; i++)
-		new_s[i] = str[i];
-
-	new_s[i] = '\0';
-
-	return (new_s);
-
+	for (length++; length--;)
+		ret[length] = *--str;
+	return (ret);
 }
+
+
 
 
 /**
@@ -114,4 +108,3 @@ int str_cmp(const char *s1, const char *s2)
 
 	return (*s1 - *s2);
 }
-

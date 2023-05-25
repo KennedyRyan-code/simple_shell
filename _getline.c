@@ -19,7 +19,7 @@ ssize_t _input_buf(info_t *info, char **buf, size_t *len)
 		*buf = NULL;
 		signal(SIGINT, sigintHandler);
 #if USE_GETLINE
-		d = _getline(buf, &len_g, stdin);
+		d = getline(buf, &len_g, stdin);
 #else
 		d = _getline(info, buf, &len_g);
 #endif
@@ -88,7 +88,7 @@ ssize_t _getinput(info_t *info)
 
 
  /**
-  *read_buf - read a buffer
+  * read_buf- reads from a buffer
   * @info: parameter struct
   * @buf: buffer
   * @i: size
@@ -107,7 +107,7 @@ ssize_t read_buf(info_t *info, char *buf, size_t *i)
 }
 
  /**
-  * _getline - gets the next line of input from standard inputs
+  * _getline- gets the next line of input from standard inputs
   * @info: paraeter struct
   * @ptr: address of pointer to buffer, preallocated or NULL
   * @length: size of preallocated pointer buffer if not NULL

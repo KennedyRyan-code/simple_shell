@@ -48,9 +48,10 @@ int unset_env(info_t *info, char *var)
 }
 
 /**
- * set_env - initialize a new environment variable/modify
+ *set_env- initialize a new environment variable/modify
  * @info: structure containg potential arguments.
  * @var: the string env variable proberty
+ * @value: value expected
  * Return: 0
  */
 int set_env(info_t *info, char *var, char *value)
